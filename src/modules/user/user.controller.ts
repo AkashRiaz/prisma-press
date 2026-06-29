@@ -1,33 +1,62 @@
 import httpStatus from "http-status";
-import { Request, Response, Router } from "express";
-import { prisma } from "../../lib/prisma";
-import bcrypt from "bcryptjs";
-import config from "../../config";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 import { userService } from "./user.service";
+import { catchAsync } from "../../utils/catchAsync";
+import { sendResponse } from "../../utils/sendResponse";
+import jwt from "jsonwebtoken";
+import config from "../../config";
+import { jwtUtils } from "../../utils/jwt";
 
-const createUser = async (req: Request, res: Response) => {
-  try {
+const registerUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
-    const user = await userService.createUserIntoDB(payload);
+    const user = await userService.registerUserIntoDB(payload);
 
-    res.status(httpStatus.CREATED).json({
+    sendResponse(res, {
       success: true,
       statusCode: httpStatus.CREATED,
       message: "User registered successfully!",
-      data: {
-        user,
-      },
+      data: { user },
     });
-  } catch (error) {
-    console.error("Error creating user:", error);
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      success: false,
-      statusCode: httpStatus.INTERNAL_SERVER_ERROR,
-      message: (error as Error).message || "Internal Server Error",
+  },
+);
+
+const getMyProfile = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const profile = await userService.getMyProfileFromDB(
+      req?.user?.id as string,
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "User profile fetched successfully!",
+      data: { profile },
     });
-  }
-};
+  },
+);
+
+const updateMyProfile = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req?.user?.id as string;
+    const payload = req.body;
+
+    const updatedProfile = await userService.updateMyProfileInDB(
+      userId,
+      payload,
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "User profile updated successfully!",
+      data: { updatedProfile },
+    });
+  },
+);
 
 export const userController = {
-  createUser,
+  registerUser,
+  getMyProfile,
+  updateMyProfile,
 };
