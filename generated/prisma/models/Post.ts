@@ -40,6 +40,7 @@ export type PostMinAggregateOutputType = {
   content: string | null
   thumbnail: string | null
   isFeatured: boolean | null
+  isPremium: boolean | null
   status: $Enums.PostStatus | null
   views: number | null
   createdAt: Date | null
@@ -53,6 +54,7 @@ export type PostMaxAggregateOutputType = {
   content: string | null
   thumbnail: string | null
   isFeatured: boolean | null
+  isPremium: boolean | null
   status: $Enums.PostStatus | null
   views: number | null
   createdAt: Date | null
@@ -66,6 +68,7 @@ export type PostCountAggregateOutputType = {
   content: number
   thumbnail: number
   isFeatured: number
+  isPremium: number
   status: number
   tags: number
   views: number
@@ -90,6 +93,7 @@ export type PostMinAggregateInputType = {
   content?: true
   thumbnail?: true
   isFeatured?: true
+  isPremium?: true
   status?: true
   views?: true
   createdAt?: true
@@ -103,6 +107,7 @@ export type PostMaxAggregateInputType = {
   content?: true
   thumbnail?: true
   isFeatured?: true
+  isPremium?: true
   status?: true
   views?: true
   createdAt?: true
@@ -116,6 +121,7 @@ export type PostCountAggregateInputType = {
   content?: true
   thumbnail?: true
   isFeatured?: true
+  isPremium?: true
   status?: true
   tags?: true
   views?: true
@@ -217,6 +223,7 @@ export type PostGroupByOutputType = {
   content: string
   thumbnail: string | null
   isFeatured: boolean
+  isPremium: boolean
   status: $Enums.PostStatus
   tags: string[]
   views: number
@@ -254,6 +261,7 @@ export type PostWhereInput = {
   content?: Prisma.StringFilter<"Post"> | string
   thumbnail?: Prisma.StringNullableFilter<"Post"> | string | null
   isFeatured?: Prisma.BoolFilter<"Post"> | boolean
+  isPremium?: Prisma.BoolFilter<"Post"> | boolean
   status?: Prisma.EnumPostStatusFilter<"Post"> | $Enums.PostStatus
   tags?: Prisma.StringNullableListFilter<"Post">
   views?: Prisma.IntFilter<"Post"> | number
@@ -270,6 +278,7 @@ export type PostOrderByWithRelationInput = {
   content?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrderInput | Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   status?: Prisma.SortOrder
   tags?: Prisma.SortOrder
   views?: Prisma.SortOrder
@@ -289,6 +298,7 @@ export type PostWhereUniqueInput = Prisma.AtLeast<{
   content?: Prisma.StringFilter<"Post"> | string
   thumbnail?: Prisma.StringNullableFilter<"Post"> | string | null
   isFeatured?: Prisma.BoolFilter<"Post"> | boolean
+  isPremium?: Prisma.BoolFilter<"Post"> | boolean
   status?: Prisma.EnumPostStatusFilter<"Post"> | $Enums.PostStatus
   tags?: Prisma.StringNullableListFilter<"Post">
   views?: Prisma.IntFilter<"Post"> | number
@@ -305,6 +315,7 @@ export type PostOrderByWithAggregationInput = {
   content?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrderInput | Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   status?: Prisma.SortOrder
   tags?: Prisma.SortOrder
   views?: Prisma.SortOrder
@@ -327,6 +338,7 @@ export type PostScalarWhereWithAggregatesInput = {
   content?: Prisma.StringWithAggregatesFilter<"Post"> | string
   thumbnail?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
   isFeatured?: Prisma.BoolWithAggregatesFilter<"Post"> | boolean
+  isPremium?: Prisma.BoolWithAggregatesFilter<"Post"> | boolean
   status?: Prisma.EnumPostStatusWithAggregatesFilter<"Post"> | $Enums.PostStatus
   tags?: Prisma.StringNullableListFilter<"Post">
   views?: Prisma.IntWithAggregatesFilter<"Post"> | number
@@ -341,6 +353,7 @@ export type PostCreateInput = {
   content: string
   thumbnail?: string | null
   isFeatured?: boolean
+  isPremium?: boolean
   status?: $Enums.PostStatus
   tags?: Prisma.PostCreatetagsInput | string[]
   views?: number
@@ -356,6 +369,7 @@ export type PostUncheckedCreateInput = {
   content: string
   thumbnail?: string | null
   isFeatured?: boolean
+  isPremium?: boolean
   status?: $Enums.PostStatus
   tags?: Prisma.PostCreatetagsInput | string[]
   views?: number
@@ -371,6 +385,7 @@ export type PostUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   tags?: Prisma.PostUpdatetagsInput | string[]
   views?: Prisma.IntFieldUpdateOperationsInput | number
@@ -386,6 +401,7 @@ export type PostUncheckedUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   tags?: Prisma.PostUpdatetagsInput | string[]
   views?: Prisma.IntFieldUpdateOperationsInput | number
@@ -401,6 +417,7 @@ export type PostCreateManyInput = {
   content: string
   thumbnail?: string | null
   isFeatured?: boolean
+  isPremium?: boolean
   status?: $Enums.PostStatus
   tags?: Prisma.PostCreatetagsInput | string[]
   views?: number
@@ -415,6 +432,7 @@ export type PostUpdateManyMutationInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   tags?: Prisma.PostUpdatetagsInput | string[]
   views?: Prisma.IntFieldUpdateOperationsInput | number
@@ -428,6 +446,7 @@ export type PostUncheckedUpdateManyInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   tags?: Prisma.PostUpdatetagsInput | string[]
   views?: Prisma.IntFieldUpdateOperationsInput | number
@@ -455,6 +474,7 @@ export type PostCountOrderByAggregateInput = {
   content?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   status?: Prisma.SortOrder
   tags?: Prisma.SortOrder
   views?: Prisma.SortOrder
@@ -473,6 +493,7 @@ export type PostMaxOrderByAggregateInput = {
   content?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   status?: Prisma.SortOrder
   views?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -486,6 +507,7 @@ export type PostMinOrderByAggregateInput = {
   content?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   status?: Prisma.SortOrder
   views?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -598,6 +620,7 @@ export type PostCreateWithoutCommentsInput = {
   content: string
   thumbnail?: string | null
   isFeatured?: boolean
+  isPremium?: boolean
   status?: $Enums.PostStatus
   tags?: Prisma.PostCreatetagsInput | string[]
   views?: number
@@ -612,6 +635,7 @@ export type PostUncheckedCreateWithoutCommentsInput = {
   content: string
   thumbnail?: string | null
   isFeatured?: boolean
+  isPremium?: boolean
   status?: $Enums.PostStatus
   tags?: Prisma.PostCreatetagsInput | string[]
   views?: number
@@ -642,6 +666,7 @@ export type PostUpdateWithoutCommentsInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   tags?: Prisma.PostUpdatetagsInput | string[]
   views?: Prisma.IntFieldUpdateOperationsInput | number
@@ -656,6 +681,7 @@ export type PostUncheckedUpdateWithoutCommentsInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   tags?: Prisma.PostUpdatetagsInput | string[]
   views?: Prisma.IntFieldUpdateOperationsInput | number
@@ -670,6 +696,7 @@ export type PostCreateWithoutAuthorInput = {
   content: string
   thumbnail?: string | null
   isFeatured?: boolean
+  isPremium?: boolean
   status?: $Enums.PostStatus
   tags?: Prisma.PostCreatetagsInput | string[]
   views?: number
@@ -684,6 +711,7 @@ export type PostUncheckedCreateWithoutAuthorInput = {
   content: string
   thumbnail?: string | null
   isFeatured?: boolean
+  isPremium?: boolean
   status?: $Enums.PostStatus
   tags?: Prisma.PostCreatetagsInput | string[]
   views?: number
@@ -727,6 +755,7 @@ export type PostScalarWhereInput = {
   content?: Prisma.StringFilter<"Post"> | string
   thumbnail?: Prisma.StringNullableFilter<"Post"> | string | null
   isFeatured?: Prisma.BoolFilter<"Post"> | boolean
+  isPremium?: Prisma.BoolFilter<"Post"> | boolean
   status?: Prisma.EnumPostStatusFilter<"Post"> | $Enums.PostStatus
   tags?: Prisma.StringNullableListFilter<"Post">
   views?: Prisma.IntFilter<"Post"> | number
@@ -741,6 +770,7 @@ export type PostCreateManyAuthorInput = {
   content: string
   thumbnail?: string | null
   isFeatured?: boolean
+  isPremium?: boolean
   status?: $Enums.PostStatus
   tags?: Prisma.PostCreatetagsInput | string[]
   views?: number
@@ -754,6 +784,7 @@ export type PostUpdateWithoutAuthorInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   tags?: Prisma.PostUpdatetagsInput | string[]
   views?: Prisma.IntFieldUpdateOperationsInput | number
@@ -768,6 +799,7 @@ export type PostUncheckedUpdateWithoutAuthorInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   tags?: Prisma.PostUpdatetagsInput | string[]
   views?: Prisma.IntFieldUpdateOperationsInput | number
@@ -782,6 +814,7 @@ export type PostUncheckedUpdateManyWithoutAuthorInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   tags?: Prisma.PostUpdatetagsInput | string[]
   views?: Prisma.IntFieldUpdateOperationsInput | number
@@ -826,6 +859,7 @@ export type PostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   content?: boolean
   thumbnail?: boolean
   isFeatured?: boolean
+  isPremium?: boolean
   status?: boolean
   tags?: boolean
   views?: boolean
@@ -843,6 +877,7 @@ export type PostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   content?: boolean
   thumbnail?: boolean
   isFeatured?: boolean
+  isPremium?: boolean
   status?: boolean
   tags?: boolean
   views?: boolean
@@ -858,6 +893,7 @@ export type PostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   content?: boolean
   thumbnail?: boolean
   isFeatured?: boolean
+  isPremium?: boolean
   status?: boolean
   tags?: boolean
   views?: boolean
@@ -873,6 +909,7 @@ export type PostSelectScalar = {
   content?: boolean
   thumbnail?: boolean
   isFeatured?: boolean
+  isPremium?: boolean
   status?: boolean
   tags?: boolean
   views?: boolean
@@ -881,7 +918,7 @@ export type PostSelectScalar = {
   authorId?: boolean
 }
 
-export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "thumbnail" | "isFeatured" | "status" | "tags" | "views" | "createdAt" | "updatedAt" | "authorId", ExtArgs["result"]["post"]>
+export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "thumbnail" | "isFeatured" | "isPremium" | "status" | "tags" | "views" | "createdAt" | "updatedAt" | "authorId", ExtArgs["result"]["post"]>
 export type PostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   comments?: boolean | Prisma.Post$commentsArgs<ExtArgs>
@@ -906,6 +943,7 @@ export type $PostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     content: string
     thumbnail: string | null
     isFeatured: boolean
+    isPremium: boolean
     status: $Enums.PostStatus
     tags: string[]
     views: number
@@ -1342,6 +1380,7 @@ export interface PostFieldRefs {
   readonly content: Prisma.FieldRef<"Post", 'String'>
   readonly thumbnail: Prisma.FieldRef<"Post", 'String'>
   readonly isFeatured: Prisma.FieldRef<"Post", 'Boolean'>
+  readonly isPremium: Prisma.FieldRef<"Post", 'Boolean'>
   readonly status: Prisma.FieldRef<"Post", 'PostStatus'>
   readonly tags: Prisma.FieldRef<"Post", 'String[]'>
   readonly views: Prisma.FieldRef<"Post", 'Int'>

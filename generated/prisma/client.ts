@@ -57,6 +57,11 @@ export type Post = Prisma.PostModel
  */
 export type Profile = Prisma.ProfileModel
 /**
+ * Model Subscription
+ * 
+ */
+export type Subscription = Prisma.SubscriptionModel
+/**
  * Model User
  * 
  */
