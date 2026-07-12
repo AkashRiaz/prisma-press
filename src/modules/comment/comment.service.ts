@@ -25,14 +25,14 @@ const createCommentIntoDB = async (
   return comment;
 };
 
-// const getSingleCommentByCommentIdFromDB = async (commentId: string) => {
-//   const comment = await prisma.comment.findUnique({
-//     where: {
-//       id: commentId,
-//     },
-//   });
-//   return comment;
-// };
+const getSingleCommentByCommentIdFromDB = async (commentId: string) => {
+  const comment = await prisma.comment.findUnique({
+    where: {
+      id: commentId,
+    },
+  });
+  return comment;
+};
 
 const getSingleCommentByPostIdFromDB = async (postId: string) => {
   const comment = await prisma.comment.findMany({
@@ -147,5 +147,5 @@ export const commentService = {
   updateCommentIntoDB,
   updateCommentModerationIntoDB,
   deleteCommentFromDB,
-  // getSingleCommentByCommentIdFromDB,
+  getSingleCommentByCommentIdFromDB,
 };

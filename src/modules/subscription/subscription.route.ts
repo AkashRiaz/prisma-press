@@ -11,12 +11,4 @@ router.post(
   subscriptionController.createCheckoutSession,
 );
 
-router.post("/webhook", subscriptionController.handleWebhook);
-
-router.get(
-  "/status",
-  auth(Role.ADMIN, Role.AUTHOR, Role.USER),
-  subscriptionController.getSubscriptionStatus,
-);
-
 export const subscriptionRoute = router;
