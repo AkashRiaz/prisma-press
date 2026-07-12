@@ -20,21 +20,21 @@ const createComment = catchAsync(
   },
 );
 
-const getSingleCommentByCommentId = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { commentId } = req.params;
-    // console.log(commentId, "commentId");
-    const result = await commentService.getSingleCommentByCommentIdFromDB(
-      commentId as string,
-    );
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatus.OK,
-      message: "Comment retrieved successfully",
-      data: result,
-    });
-  },
-);
+// const getSingleCommentByCommentId = catchAsync(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     const { commentId } = req.params;
+//     // console.log(commentId, "commentId");
+//     const result = await commentService.getSingleCommentByCommentIdFromDB(
+//       commentId as string,
+//     );
+//     sendResponse(res, {
+//       success: true,
+//       statusCode: httpStatus.OK,
+//       message: "Comment retrieved successfully",
+//       data: result,
+//     });
+//   },
+// );
 
 const getSingleCommentByPostId = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -133,5 +133,5 @@ export const commentController = {
   updateComment,
   updateCommentModeration,
   deleteComment,
-  getSingleCommentByCommentId,
+  // getSingleCommentByCommentId,
 };

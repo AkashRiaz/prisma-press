@@ -11,6 +11,21 @@ const createPostIntoBD = async (
   payload: ICreatePostPayload,
   userId: string,
 ) => {
+  const user = await prisma.user.findUniqueOrThrow({
+    where: {
+      id: userId,
+    },
+    include: {
+      subscription: true,
+    },
+  });
+
+  if (payload.isPremium && user.subscription?.status !== "ACTIVE") {
+    throw new Error(
+      "You are not premium user. So you cannot create premium post",
+    );
+  }
+
   const result = await prisma.post.create({
     data: {
       ...payload,
@@ -25,8 +40,12 @@ const getAllPostsFromDB = async (query: IPostQuery) => {
   const limit = query.limit ? Number(query.limit) : 10;
   const page = query.page ? Number(query.page) : 1;
   const skip = (page - 1) * limit;
-  const sortBy = query.sortBy || "createdAt";
-  const sortOrder = query.sortOrder || "desc";
+  const sortBy = query.sortBy ? query.sortBy : "createdAt";
+  const sortOrder = query.sortOrder ? query.sortOrder : "desc";
+
+  const tags = query.tags ? JSON.parse(query.tags as string) : null;
+
+  const tagsArray = Array.isArray(tags) ? tags : [];
 
   const andConditions: PostWhereInput[] = [];
 
@@ -76,18 +95,22 @@ const getAllPostsFromDB = async (query: IPostQuery) => {
   if (query.tags) {
     andConditions.push({
       tags: {
-        hasSome: query?.tags as string[],
+        hasSome: tagsArray,
       },
     });
   }
 
   if (query.status) {
     andConditions.push({
-      status: query.status as PostStatus,
+      status: query.status,
     });
   }
 
-  const result = await prisma.post.findMany({
+  andConditions.push({
+    isPremium: false,
+  });
+
+  const posts = await prisma.post.findMany({
     where: {
       AND: andConditions,
     },
@@ -108,7 +131,20 @@ const getAllPostsFromDB = async (query: IPostQuery) => {
       },
     },
   });
-  return result;
+  const totalPostCount = await prisma.post.count({
+    where: {
+      AND: andConditions,
+    },
+  });
+  return {
+    data: posts,
+    meta: {
+      page: page,
+      limit: limit,
+      total: totalPostCount,
+      totalPages: Math.ceil(totalPostCount / limit),
+    },
+  };
 };
 
 const getSinglePostFromDB = async (postId: string) => {
@@ -127,6 +163,7 @@ const getSinglePostFromDB = async (postId: string) => {
     const post = await tx.post.findUniqueOrThrow({
       where: {
         id: postId,
+        isPremium: false,
       },
       include: {
         author: {

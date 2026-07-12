@@ -7,8 +7,8 @@ const router = Router();
 
 router.post("/",auth(Role.USER, Role.ADMIN, Role.AUTHOR), commentController.createComment)
 
-router.get("/comment/:postId", commentController.getSingleCommentByPostId)
-router.get("/:commentId", commentController.getSingleCommentByCommentId)
+router.get("/:postId", commentController.getSingleCommentByPostId)
+// router.get("/:commentId", commentController.getSingleCommentByCommentId)
 
 router.get("/author/:authorId", commentController.getCommentsByAuthorId)
 

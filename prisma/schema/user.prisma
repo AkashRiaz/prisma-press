@@ -8,9 +8,11 @@ model User {
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   profile      Profile?
+  subscription Subscription?
+
   comments     Comment[]
   posts        Post[]
-  subscription Subscription?
+  
 
   @@map("users")
 }
