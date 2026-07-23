@@ -87,6 +87,10 @@ const getAllPostsFromDB = async (query: IPostQuery) => {
     });
   }
 
+  andConditions.push({
+    isPremium: false,
+  });
+
   const result = await prisma.post.findMany({
     where: {
       AND: andConditions,

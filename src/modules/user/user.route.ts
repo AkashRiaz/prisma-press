@@ -7,9 +7,16 @@ const router = Router();
 
 router.post("/register", userController.registerUser);
 
-router.get("/me", auth(Role.USER, Role.ADMIN), userController.getMyProfile);
+router.get(
+  "/me",
+  auth(Role.USER, Role.ADMIN, Role.AUTHOR),
+  userController.getMyProfile,
+);
 
-router.put("/my-profile", auth(Role.USER, Role.ADMIN, Role.AUTHOR), userController.updateMyProfile);
-
+router.put(
+  "/my-profile",
+  auth(Role.USER, Role.ADMIN, Role.AUTHOR),
+  userController.updateMyProfile,
+);
 
 export const userRoutes = router;
